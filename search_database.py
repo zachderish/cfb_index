@@ -12,21 +12,21 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor(dictionary=True)
 
-def table_data():
+def table_data(year):
   # get table data
-  mycursor.execute("SELECT * FROM recruiting24")
+  mycursor.execute("SELECT * FROM recruiting%s", (int(year),))
   data = mycursor.fetchall()
   json_data = json.dumps(data)
   return json_data
 
-def team_data(team):
-  mycursor.execute("SELECT * FROM recruiting24 WHERE school = %s", (team,))
+def team_data(year, team):
+  mycursor.execute("SELECT * FROM recruiting%s WHERE school = %s", (int(year), team))
   data = mycursor.fetchall()
   json_data = json.dumps(data)
   return json_data
 
-def position_data(position):
-  mycursor.execute("SELECT * FROM recruiting24 WHERE position = %s", (position,))
+def position_data(year, position):
+  mycursor.execute("SELECT * FROM recruiting%s WHERE position = %s", (int(year), position))
   data = mycursor.fetchall()
   json_data = json.dumps(data)
   return json_data
