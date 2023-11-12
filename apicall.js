@@ -1,16 +1,18 @@
-let text = document.getElementById("text");
+let textObj = document.getElementById("text");
 
-fetch('http://localhost:5000/recruiting') 
+fetch('http://127.0.0.1:5000/recruiting/year=2024') 
   .then(response => { 
     if (response.ok) { 
-      return response.json(); // Parse the response data as JSON 
+        return response.json(); // Parse the response data as JSON 
     } else { 
-      throw new Error('API request failed'); 
+        throw new Error('API request failed'); 
     } 
   }) 
   .then(data => { 
     // Process the response data here 
-    text.innerHTML(data); // Example: Logging the data to the console 
+    for (let i = 0; i < 100; i++) {
+        textObj.textContent += data[i].name; // Example: Logging the data to the console 
+    }
   }) 
   .catch(error => { 
     // Handle any errors here 
