@@ -1,4 +1,4 @@
-let textObj = document.getElementById("text");
+let table = document.getElementById("table");
 
 fetch('http://127.0.0.1:5000/recruiting/year=2024') 
   .then(response => { 
@@ -10,11 +10,22 @@ fetch('http://127.0.0.1:5000/recruiting/year=2024')
   }) 
   .then(data => { 
     // Process the response data here 
-    for (let i = 0; i < 100; i++) {
-        textObj.textContent += data[i].name; // Example: Logging the data to the console 
-    }
+    create_table(data);
   }) 
   .catch(error => { 
     // Handle any errors here 
     console.error(error); // Example: Logging the error to the console 
   });
+
+function create_table(data) {
+    for (let i = 0; i < 100; i++) {
+        let row = table.insertRow(i+1);
+        let name = row.insertCell(0);
+        let position = row.insertCell(1);
+        let ranking = row.insertCell(2);
+
+        name.textContent = `${data[i].name}`
+        position.textContent = `${data[i].position}`
+        ranking.textContent = `${data[i].ranking}`;
+    }
+}
