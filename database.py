@@ -9,15 +9,14 @@ mydb = mysql.connector.connect(
   database="mydatabase"
 )
 
-mycursor = mydb.cursor()
+def table_data():
+  # get table data
+  mycursor = mydb.cursor()
 
-mycursor.execute("SELECT * FROM recruiting24")
-data = mycursor.fetchall()
+  mycursor.execute("SELECT * FROM recruiting24")
+  data = mycursor.fetchall()
 
-for row in data:
-    if (int(row[2]) < 100):
-      print(row)
-      print("\n")
+  return data
 
 '''
 recruiting_class = GetRecruitingClass.get_class(2024)
