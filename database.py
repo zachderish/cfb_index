@@ -1,5 +1,6 @@
 import mysql.connector, config
 import GetRecruitingClass
+import json
 
 #create recruiting databases
 mydb = mysql.connector.connect(
@@ -9,14 +10,20 @@ mydb = mysql.connector.connect(
   database="mydatabase"
 )
 
+mycursor = mydb.cursor(dictionary=True)
+
 def table_data():
   # get table data
-  mycursor = mydb.cursor()
-
   mycursor.execute("SELECT * FROM recruiting24")
   data = mycursor.fetchall()
+  json_data = json.dumps(data)
+  return json_data
 
-  return data
+def team_data(team):
+  mycursor.execute("SELECT * FROM recruiting24 WHERE school = %s", (team,))
+  data = mycursor.fetchall()
+  json_data = json.dumps(data)
+  return json_data
 
 '''
 recruiting_class = GetRecruitingClass.get_class(2024)
