@@ -25,6 +25,12 @@ def team_data(team):
   json_data = json.dumps(data)
   return json_data
 
+def position_data(position):
+  mycursor.execute("SELECT * FROM recruiting24 WHERE position = %s", (position,))
+  data = mycursor.fetchall()
+  json_data = json.dumps(data)
+  return json_data
+
 '''
 recruiting_class = GetRecruitingClass.get_class(2024)
 sql = "INSERT INTO recruiting24 (name, position, ranking, stars, height, weight, school) VALUES (%s, %s, %s, %s, %s, %s, %s)"

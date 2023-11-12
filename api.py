@@ -7,11 +7,13 @@ app = Flask(__name__)
 def recruiting():
    return database.table_data()
 
-@app.route('/recruiting/<team>')
+@app.route('/recruiting/team=<team>')
 def team_recruiting(team):
    return database.team_data(team)
 
-
+@app.route('/recruiting/position=<position>')
+def position_recruiting(position):
+   return database.position_data(position)
 
 if __name__ == '__main__':
    app.run(debug = True)
