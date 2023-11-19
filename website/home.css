@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    align-items: center;
+    background-color: #121212;
+}
+
+#logo {
+    color: white;
+    background-color: #1F1B24;
+    padding: 10px 30px;
+    margin-bottom: 20px;
+}
+
+#nav {
+    background-color: #1F1B24;
+}
+
+#nav_bar {
+    display: flex;
+    padding-left: 0px;
+}
+
+#nav_bar li {
+    list-style-type: none;
+    padding: 8px 20px;
+}
+a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}

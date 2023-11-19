@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    align-items: center;
+    background-color: #121212;
+}
+
+#logo {
+    color: white;
+    background-color: #1F1B24;
+    padding: 10px 30px;
+    margin-bottom: 20px;
+}
+
+#recruiting {
+    background-color: #1F1B24;
+}
+
+table {
+    border: 1px solid;
+    border-color: white;
+}
+
+th {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 10px 10px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
+
+td {
+    background-color: white;
+    padding: 10px 10px;
+}
+
+td a {
+    color: #121212;
+}
