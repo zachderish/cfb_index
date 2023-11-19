@@ -18,7 +18,7 @@ fetch('http://127.0.0.1:5000/recruiting/year=2024')
   });
 
 function create_table(data) {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 2000; i++) {
         let row = table.insertRow(i+1);
         let name = row.insertCell(0);
         let position = row.insertCell(1);
