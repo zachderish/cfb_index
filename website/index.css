@@ -32,9 +32,9 @@ html, body {
 #content {
     padding-top: 10px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     border: 1px solid #0076B6;
-    height: 100%;
     font-size: 14px;
 }
 
