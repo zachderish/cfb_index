@@ -12,6 +12,10 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor(dictionary=True)
 
+# get general overview of recruiting years
+def recruiting_data():
+
+
 def table_data(year):
   # get table data
   mycursor.execute("SELECT * FROM recruiting%s", (int(year),))
