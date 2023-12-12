@@ -14,7 +14,11 @@ mycursor = mydb.cursor(dictionary=True)
 
 # get general overview of recruiting years
 def recruiting_data():
-
+  # get table data
+  mycursor.execute("SELECT * FROM recruiting")
+  data = mycursor.fetchall()
+  json_data = json.dumps(data)
+  return json_data
 
 def table_data(year):
   # get table data
