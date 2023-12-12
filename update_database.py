@@ -11,20 +11,37 @@ mydb = mysql.connector.connect(
 
 
 mycursor = mydb.cursor(dictionary=True)
-'''
+
 sql = "INSERT INTO recruiting (year, top_player, top_team) VALUES (%s, %s, %s)"
 val = [
-  ("2018", "Trevor Lawrence", "Georgia")
+  ("2017", "Jaelan Philips", "Alabama"),
+  ("2016", "Rashan Gary", "Alabama"),
+  ("2015", "Trenton Thompson", "Alabama"),
+  ("2014", "Leonard Fournette", "Alabama"),
+  ("2013", "Robert Nkemdiche", "Alabama"),
+  ("2012", "Dorial Green-Beckham", "Alabama"),
+  ("2011", "Jadeveon Clowney", "Alabama"),
+  ("2010", "Ronald Powell", "Florida"),
+  ("2009", "Matt Barkley", "LSU"),
+  ("2008", "Da'Quan Bowers", "Miami"),
+  ("2007", "Joe McKnight", "Florida"),
+  ("2006", "Andre Smith", "USC"),
+  ("2005", "Eugene Monroe", "USC"),
+  ("2004", "Adrian Peterson", "Florida State"),
+  ("2003", "Ernie Sims", "Florida"),
+  ("2002", "Vince Young", "Texas"),
+  ("2001", "Kevin Jones", "Florida State"),
+  ("2000", "D.J. Williams", "Tennessee")
 ]
 mycursor.executemany(sql, val)
 
 mydb.commit()
-'''
+
 
 #print table contents
-table_name = "recruiting2024"
+table_name = "recruiting"
 
-mycursor.execute("SELECT * FROM recruiting2010")
+mycursor.execute("SELECT * FROM " + table_name)
 
 results = mycursor.fetchall()
 
