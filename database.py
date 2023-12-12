@@ -9,5 +9,9 @@ mydb = mysql.connector.connect(
   password=config.PASS,
   database="mydatabase"
 )
-
 mycursor = mydb.cursor()
+mycursor.execute("SELECT * FROM recruiting2023")
+
+result = mycursor.fetchall()
+for x in result:
+    print(x)

@@ -12,6 +12,15 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor(dictionary=True)
 '''
+sql = "INSERT INTO recruiting (year, top_player, top_team) VALUES (%s, %s, %s)"
+val = [
+  ("2018", "Trevor Lawrence", "Georgia")
+]
+mycursor.executemany(sql, val)
+
+mydb.commit()
+'''
+'''
 #print table contents
 table_name = "recruiting2024"
 
