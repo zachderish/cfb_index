@@ -20,7 +20,7 @@ mycursor.executemany(sql, val)
 
 mydb.commit()
 '''
-'''
+
 #print table contents
 table_name = "recruiting2024"
 
@@ -30,13 +30,20 @@ results = mycursor.fetchall()
 
 for row in results:
     print(row)
-'''
 
+
+'''
 #update table data
 current_year = 2024
+
+mycursor.execute("DROP TABLE recruiting" + str(current_year))
+
+mycursor.execute("CREATE TABLE recruiting" + str(current_year) + " (name VARCHAR(255), position VARCHAR(255), ranking VARCHAR(255), stars VARCHAR(255), height VARCHAR(255), weight VARCHAR(255), school VARCHAR(255))")
+
 print("calling" + str(current_year))
 recruiting_class = GetRecruitingClass.get_class(current_year)
-sql = "UPDATE recruiting" + str(current_year) + "SET (name, position, ranking, stars, height, weight, school) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+sql = "INSERT INTO recruiting" + str(current_year) + " (name, position, ranking, stars, height, weight, school) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 mycursor.executemany(sql, recruiting_class)
 
 mydb.commit()
+'''
