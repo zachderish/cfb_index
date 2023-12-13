@@ -10,6 +10,13 @@ def recruiting():
    response.headers['Access-Control-Allow-Origin'] = '*'
    return response
 
+@app.route('/recruiting/teams/year=<year>')
+def recruiting_teams(year):
+   data = search_database.recruiting_teams(year)
+   response = make_response(data)
+   response.headers['Access-Control-Allow-Origin'] = '*'
+   return response
+
 @app.route('/recruiting/year=<year>')
 def year_recruiting(year):
    data = search_database.table_data(year)

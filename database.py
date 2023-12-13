@@ -10,8 +10,19 @@ mydb = mysql.connector.connect(
   database="mydatabase"
 )
 mycursor = mydb.cursor()
-mycursor.execute("SELECT * FROM recruiting2023")
+
+'''
+current_year = 2023
+print("calling" + str(current_year))
+recruiting_class = GetRecruitingClass.get_class_teams(current_year)
+print(recruiting_class)
+sql = "INSERT INTO team" + str(current_year) + " (ranking, team, points) VALUES (%s, %s, %s)"
+mycursor.executemany(sql, recruiting_class)
+'''
+mycursor.execute("SHOW TABLES")
 
 result = mycursor.fetchall()
 for x in result:
     print(x)
+
+mydb.commit()
