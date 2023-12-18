@@ -20,6 +20,30 @@ def recruiting_data():
   json_data = json.dumps(data)
   return json_data
 
+# get records given a year
+def records(year):
+  mycursor.execute("SELECT * FROM records%s", (int(year),))
+  data = mycursor.fetchall()
+  json_data = json.dumps(data)
+  return json_data
+
+# get records given team
+def records_team(team):
+  json_data = ""
+  year = 2023
+  while year >= 2010:
+    json_data += (records_team_year(team, year))
+    year -= 1
+  return json_data
+
+# get records given team and a year
+def records_team_year(team, year):
+  mycursor.execute("SELECT * FROM records%s where team=%s", (int(year), team))
+  data = mycursor.fetchall()
+  json_data = json.dumps(data)
+  return json_data
+
+
 # get general team data given a year
 def recruiting_teams(year):
   mycursor.execute("SELECT * FROM team%s", (int(year),))

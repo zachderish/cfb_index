@@ -3,6 +3,28 @@ import search_database
 
 app = Flask(__name__)
 
+@app.route('/records/year=<year>')
+def records(year):
+   data = search_database.records(year)
+   response = make_response(data)
+   response.headers['Access-Control-Allow-Origin'] = '*'
+   return response
+
+@app.route('/records/team=<team>')
+def records_teams(team):
+   data = search_database.records_team(team)
+   response = make_response(data)
+   response.headers['Access-Control-Allow-Origin'] = '*'
+   return response   
+
+@app.route('/records/team=<team>/year=<year>')
+def records_team_year(team, year):
+   data = search_database.records_team_year(team, year)
+   response = make_response(data)
+   response.headers['Access-Control-Allow-Origin'] = '*'
+   return response
+
+
 @app.route('/recruiting')
 def recruiting():
    data = search_database.recruiting_data()

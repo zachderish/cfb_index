@@ -10,22 +10,30 @@ CONFIGURATION.api_key_prefix['Authorization'] = 'Bearer'
 api_instance = cfbd.GamesApi(cfbd.ApiClient(CONFIGURATION))
 
 def append_data_team(team, data):
+    team.append(data.team_id)
+    team.append(data.year)
     team.append(data.team)
-    team.append(data.team)
-    team.append(data.points)
+    team.append(data.conference)
+    team.append(data.division)
+    team.append(data.total.games)
+    team.append(data.total.wins)
+    team.append(data.total.losses)
+    team.append(data.total.ties)
+    team.append(data.conference_games.games)
+    team.append(data.conference_games.wins)
+    team.append(data.conference_games.losses)
+    team.append(data.conference_games.ties)
     return team
 
-def get_team_records(year, conference):
+def get_team_records(year):
     print(year)
     year = year # int | Recruiting class year (required if team no specified) (optional)
-    conference = conference
 
     teams = []
     try:
         # Team recruiting ratings and rankings
-        api_response = api_instance.get_team_records(year=year, conference=conference)
+        api_response = api_instance.get_team_records(year=year)
         print(api_response)
-        return
         for data in api_response:
             team = []
             team = append_data_team(team, data)
