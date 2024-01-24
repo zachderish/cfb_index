@@ -2,7 +2,7 @@
 
 College football statistics API and web app.
 
-**Languages and Technologies**
+## Languages and Technologies ##
   * Python
   * JavaScript
   * MySQL
