@@ -3,6 +3,7 @@ import search_database
 
 app = Flask(__name__)
 
+'''
 @app.route('/records/year=<year>')
 def records(year):
    data = search_database.records(year)
@@ -59,6 +60,4 @@ def position_recruiting(year, position):
    response = make_response(data)
    response.headers['Access-Control-Allow-Origin'] = '*'
    return response
-
-if __name__ == '__main__':
-   app.run(debug = True)
+'''
