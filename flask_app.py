@@ -1,28 +1,29 @@
 # A very simple Flask Hello World app for you to get started with...
 
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+import mysql.connector, config
 import config
 
 app = Flask(__name__)
 
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="zderish",
-    password=config.DB_PASS,
-    hostname="zderish.mysql.pythonanywhere-services.com",
-    databasename="zderish$cfb",
+
+
+mydb = mysql.connector.connect(
+  host="zderish.mysql.pythonanywhere-services.com",
+  user="zderish",
+  password=config.DB_PASS,
+  database="zderish$cfb"
 )
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = SQLAlchemy(app)
-
+mycursor = mydb.cursor(dictionary=True)
+mycursor.execute("SELECT * FROM comments")
+data = mycursor.fetchall()
 
 @app.route('/')
 def hello_world():
-    return "Hello"
+    return f"Hello {data}"
 
 @app.route('/<name>')
 def hello_name(name):
     return f"Hello {name}!"
+
