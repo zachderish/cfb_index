@@ -1,20 +1,22 @@
-import cfbd, config
+import cfbd
 import sys
 import mysql.connector
 from cfbd.rest import ApiException
+
+sys.path.append('../config')
 
 #Connect to database
 mydb = mysql.connector.connect(
   host="cfb-database.cxwmm2qoadf6.us-east-1.rds.amazonaws.com",
   user="admin",
-  password=config.PASS,
+  password=sys.config.PASS,
   database="cfb"
 )
 
 
 # Configure API key authorization: ApiKeyAuth
 CONFIGURATION = cfbd.Configuration()
-CONFIGURATION.api_key['Authorization'] = config.API_KEY
+CONFIGURATION.api_key['Authorization'] = sys.config.API_KEY
 CONFIGURATION.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
