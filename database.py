@@ -1,7 +1,8 @@
 import mysql.connector, config
-import GetRecruitingClass
-import GetTeamInfo
+#import GetRecruitingClass
+#import GetTeamInfo
 import json
+import csv
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -10,30 +11,19 @@ import config
 
 app = Flask(__name__)
 
-
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="zderish",
-    password=config.DB_PASS,
-    hostname="zderish.mysql.pythonanywhere-services.com",
-    databasename="zderish$cfb",
+mydb = mysql.connector.connect(
+  host="zderish.mysql.pythonanywhere-services.com",
+  user="zderish",
+  password=config.DB_PASS,
+  database="zderish$cfb"
 )
 
+cursor = mydb.cursor()
 
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db = SQLAlchemy(app)
-
-class Player_Recruiting_2024(db.Model):
-
-    __tablename__ = "player_recruiting_2024"
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    pos = db.Column(db.String(5))
-    ranking = db.Column(db.Integer())
-
+# add recruiting information 2023
+with open('2023recruiting.csv') as recruiting2024:
+    for lines in recruiting2024:
+        print(lines)
 
 '''
 #create recruiting databases
