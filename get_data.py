@@ -20,13 +20,25 @@ CONFIGURATION.api_key_prefix['Authorization'] = 'Bearer'
 api_instance = cfbd.RecruitingApi(cfbd.ApiClient(CONFIGURATION))
 
 def append_data_player(player, data):
+    player.append(data.id)
+    player.append(data.athleteId)
+    player.append(data.recruitType)
+    player.append(data.year)
+    player.append(data.ranking)
     player.append(data.name)
-    player.append(data.position), 
-    player.append(data.ranking), 
-    player.append(data.stars)
+    player.append(data.school)
+    player.append(data.committed_to)
+    player.append(data.position)
     player.append(data.height)
     player.append(data.weight)
-    player.append(data.committed_to)
+    player.append(data.stars)
+    player.append(data.rating)
+    player.append(data.city)
+    player.append(data.stateProvince)
+    player.append(data.country)
+    player.append(data.hometownInfo.latitude)
+    player.append(data.longitude)
+    player.append(data.countyFips)
     return player
 
 def get_class(year):
@@ -56,11 +68,11 @@ def update_class(year):
 
     mycursor.execute("DROP TABLE recruiting" + str(year))
 
-    mycursor.execute("CREATE TABLE recruiting" + str(year) + " (name VARCHAR(255), position VARCHAR(255), ranking VARCHAR(255), stars VARCHAR(255), height VARCHAR(255), weight VARCHAR(255), school VARCHAR(255))")
+    mycursor.execute("CREATE TABLE recruiting" + str(year) + " (id INT, athleteId INT, recruitType VARCHAR(25), year INT, ranking INT, name VARCHAR (50), school VARCHAR(50), committedTo VARCHAR(50), position VARCHAR(10), height DOUBLE, weight DOUBLE, stars INT, rating DOUBLE, city VARCHAR(50), stateProvince VARCHAR(20), country VARCHAR(20), latitude DOUBLE, longitude DOUBLE, countyFips VARCHAR(10))")
 
     print("calling" + str(year))
     recruiting_class = get_class(year)
-    sql = "INSERT INTO recruiting" + str(year) + " (name, position, ranking, stars, height, weight, school) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO recruiting" + str(year) + " (id, athleteId, recruitType, year, ranking, name, school, committedTo, position, height, weight, stars, rating, city, stateProvince, country, latitude, longitude, countyFips) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     mycursor.executemany(sql, recruiting_class)
 
     mydb.commit()
