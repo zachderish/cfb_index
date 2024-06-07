@@ -21,8 +21,8 @@ api_instance = cfbd.RecruitingApi(cfbd.ApiClient(CONFIGURATION))
 
 def append_data_player(player, data):
     player.append(data.id)
-    player.append(data.athleteId)
-    player.append(data.recruitType)
+    player.append(data.athlete_id)
+    player.append(data.recruit_type)
     player.append(data.year)
     player.append(data.ranking)
     player.append(data.name)
@@ -34,11 +34,11 @@ def append_data_player(player, data):
     player.append(data.stars)
     player.append(data.rating)
     player.append(data.city)
-    player.append(data.stateProvince)
+    player.append(data.state_province)
     player.append(data.country)
-    player.append(data.hometownInfo.latitude)
-    player.append(data.longitude)
-    player.append(data.countyFips)
+    player.append(data.hometown_info.latitude)
+    player.append(data.hometown_info.longitude)
+    player.append(data.hometown_info.county_fips)
     return player
 
 def get_class(year):
@@ -72,7 +72,7 @@ def update_class(year):
 
     print("calling" + str(year))
     recruiting_class = get_class(year)
-    sql = "INSERT INTO recruiting" + str(year) + " (id, athleteId, recruitType, year, ranking, name, school, committedTo, position, height, weight, stars, rating, city, stateProvince, country, latitude, longitude, countyFips) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO recruiting" + str(year) + " (id, athleteId, recruitType, year, ranking, name, school, committedTo, position, height, weight, stars, rating, city, stateProvince, country, latitude, longitude, countyFips) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     mycursor.executemany(sql, recruiting_class)
 
     mydb.commit()
