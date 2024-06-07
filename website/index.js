@@ -1,9 +1,17 @@
-let table = document.getElementById("table");
-let year = document.getElementById("year")
-let yearString = year.innerText.split(" ")[0]
-console.log(yearString)
+const select = document.getElementById("rec-yrs");
+const table = document.createElement("table");
 
-fetch(`http://127.0.0.1:5000/recruiting/year=${yearString}`) 
+const FIRST_YEAR = 2000;
+const LAST_YEAR = 2025;
+for (let i = FIRST_YEAR; i < LAST_YEAR; i++) {
+  let option = document.createElement("option");
+  option.text = `${i}`;
+  select.add(option);
+}
+
+select.addEventListener("change", function() {
+  console.log(select.value)
+  fetch(`http://ec2-54-89-177-134.compute-1.amazonaws.com/recruiting/year=${select.value}`) 
   .then(response => { 
     if (response.ok) { 
         return response.json(); // Parse the response data as JSON 
@@ -13,15 +21,21 @@ fetch(`http://127.0.0.1:5000/recruiting/year=${yearString}`)
   }) 
   .then(data => { 
     // Process the response data here 
-    create_table(data);
+    create_player_table(data);
   }) 
   .catch(error => { 
     // Handle any errors here 
     console.error(error); // Example: Logging the error to the console 
   });
+});
 
-function create_table(data) {
-  const TABLE_HEADERS = ["Name", "Position","Height", "Weight", "Stars", "Ranking", "Commited To"];
+function create_player_table(data) {
+  console.log(data[0])
+  const TABLE_HEADERS = ["Name", "Position","Height", "Weight", "Stars", "Ranking", "Committed To"];
+
+  table.innerHTML = "";
+  document.body.appendChild(table);
+
   let row = table.insertRow(0);
   // Create header
   for (let i = 0; i < TABLE_HEADERS.length; i++) {
@@ -48,6 +62,6 @@ function create_table(data) {
     weight.textContent = `${data[i].weight}`;
     stars.textContent = `${data[i].stars}`;
     ranking.textContent = `${data[i].ranking}`;
-    college.textContent = `${data[i].school}`;
+    college.textContent = `${data[i].committedTo}`;
   }
 }
