@@ -104,13 +104,13 @@ def get_team_recruiting():
 def update_team_recruiting():
     mycursor = mydb.cursor(dictionary=True)
 
-    #mycursor.execute("DROP TABLE recruiting" + str(year))
+    mycursor.execute("DROP TABLE teamRecruiting;")
 
-    mycursor.execute("CREATE TABLE teamRecruiting (year INT, rank INT, team VARCHAR(25), points DOUBLE)")
+    mycursor.execute("CREATE TABLE teamRecruiting (year INT, teamRank INT, team VARCHAR(25), points FLOAT, PRIMARY KEY (year, team));")
 
     print("calling teamRecruiting")
     recruiting_data = get_team_recruiting()
-    sql = "INSERT INTO teamRecruiting (year, rank, team, points) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT IGNORE INTO teamRecruiting (year, teamRank, team, points) VALUES (%s, %s, %s, %s);"
     mycursor.executemany(sql, recruiting_data)
 
     mydb.commit()
