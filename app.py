@@ -19,7 +19,7 @@ def hello_world():
 @app.route('/recruiting/year=<year>')
 def player_recruiting(year):
     mycursor = mydb.cursor(dictionary=True)
-    query = "SELECT * FROM recruiting" + year
+    query = 'SELECT * FROM recruiting' + year + ';'
     mycursor.execute(query)
     data = mycursor.fetchall()
     json_data = json.dumps(data)
@@ -27,16 +27,28 @@ def player_recruiting(year):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-@app.route('recruiting/year=<year>/team=<team>')
+@app.route('/recruiting/year=<year>/team=<team>')
 def team_recruiting(year, team):
     mycursor = mydb.cursor(dictionary=True)
-    query = "SELECT * FROM recruiting" + year + " WHERE team = " + team
+    query = 'SELECT * FROM recruiting' + year + ' WHERE committedTo = "' + team + '";'
     mycursor.execute(query)
     data = mycursor.fetchall()
     json_data = json.dumps(data)
     response = make_response(json_data)
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
+
+@app.route('/recruiting/year=<year>/state=<state>')
+def state_recruiting(year, state):
+    mycursor = mydb.cursor(dictionary=True)
+    query = 'SELECT * FROM recruiting' + year + ' WHERE stateProvince = "' + state + '";'
+    mycursor.execute(query)
+    data = mycursor.fetchall()
+    json_data = json.dumps(data)
+    response = make_response(json_data)
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
 
 if __name__ == "__main__":
     app.run()
