@@ -31,7 +31,7 @@ select.addEventListener("change", function() {
 
 function create_player_table(data) {
   console.log(data[0])
-  const TABLE_HEADERS = ["Name", "Position","Height", "Weight", "Stars", "Ranking", "Committed To"];
+  const TABLE_HEADERS = ["Name", "Position", "Height", "Weight", "Stars", "Ranking", "Rating", "City", "State", "Committed To"];
 
   table.innerHTML = "";
   document.body.appendChild(table);
@@ -54,7 +54,10 @@ function create_player_table(data) {
     let weight = row.insertCell(3);
     let stars = row.insertCell(4);
     let ranking = row.insertCell(5);
-    let college = row.insertCell(6);
+    let rating = row.insertCell(6);
+    let city = row.insertCell(7);
+    let state = row.insertCell(8);
+    let college = row.insertCell(9);
 
     name.textContent = `${data[i].name}`;
     position.textContent = `${data[i].position}`; 
@@ -62,6 +65,9 @@ function create_player_table(data) {
     weight.textContent = `${data[i].weight}`;
     stars.textContent = `${data[i].stars}`;
     ranking.textContent = `${data[i].ranking}`;
+    rating.textContent = `${data[i].rating}`;
+    city.textContent = `${data[i].city}`;
+    state.textContent = `${data[i].stateProvince}`;
     college.textContent = `${data[i].committedTo}`;
   }
 }
