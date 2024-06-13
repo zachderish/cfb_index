@@ -41,6 +41,13 @@ def append_data_player(player, data):
     player.append(data.hometown_info.county_fips)
     return player
 
+def append_data_team(team, data):
+    team.append(data.year)
+    team.append(data.rank)
+    team.append(data.team)
+    team.append(data.points)
+    return team
+
 def get_class(year):
     year = year # int | Recruiting class year (required if team no specified) (optional)
     classification = 'HighSchool' # str | Type of recruit (HighSchool, JUCO, PrepSchool) (optional) (default to HighSchool)
@@ -77,6 +84,41 @@ def update_class(year):
 
     mydb.commit()
 
+def get_team_recruiting():
+
+    teams = []
+    try:
+        # Team recruiting ratings and rankings
+        api_response = api_instance.get_recruiting_teams()
+    
+        for data in api_response:
+            team = []
+            team = append_data_team(team, data)
+
+            teams.append(team)
+        return teams
+
+    except ApiException as e:
+        print("Exception when calling RecruitingApi->get_recruiting_players: %s\n" % e)
+
+def update_team_recruiting():
+    mycursor = mydb.cursor(dictionary=True)
+
+    #mycursor.execute("DROP TABLE recruiting" + str(year))
+
+    mycursor.execute("CREATE TABLE teamRecruiting (year INT, rank INT, team VARCHAR(25), points DOUBLE)")
+
+    print("calling teamRecruiting")
+    recruiting_data = get_team_recruiting()
+    sql = "INSERT INTO teamRecruiting (year, rank, team, points) VALUES (%s, %s, %s, %s)"
+    mycursor.executemany(sql, recruiting_data)
+
+    mydb.commit()
+
 if  __name__ == "__main__":
-    year = sys.argv[1]
-    update_class(int(year))
+    mode = sys.argv[1]
+    if mode == "players":
+        year = sys.argv[2]
+        update_class(int(year))
+    else:
+        update_team_recruiting()
